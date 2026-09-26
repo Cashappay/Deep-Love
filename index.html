@@ -147,27 +147,31 @@
     </div>
   </header>
 
+  <!-- Receiver Name (Centered line under Cash App Lightning & BTC Prices) -->
+  <div class="w-full flex flex-col items-center justify-center pt-1.5 pb-1 shrink-0">
+    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-sm"
+         style="background-color: var(--badge-bg); border: 1px solid var(--badge-border);">
+      <span class="w-2 h-2 rounded-full bg-emerald-300 dark:bg-[#00D632]"></span>
+      <span class="text-[11px] font-medium opacity-85" style="color: var(--text-muted)">To:</span>
+      <span id="receiverName" class="text-xs sm:text-sm font-black tracking-wide" style="color: var(--text-main)">Natasha Torres</span>
+      <span class="text-[9px] font-bold text-white bg-white/15 dark:bg-white/10 px-1.5 py-0.5 rounded-full flex items-center">
+        ✓ Verified
+      </span>
+    </div>
+  </div>
+
   <!-- Keypad Display / Amount Area -->
-  <main class="flex-1 flex flex-col items-center justify-center py-1 px-2 min-h-0">
+  <main class="flex-1 flex flex-col items-center justify-center py-2 px-2 min-h-0">
     <div id="displayContainer" class="flex items-baseline justify-center tracking-tight transition-all duration-150" style="color: var(--text-main);">
       <span id="dollarSign" class="text-4xl sm:text-5xl mr-1 font-bold select-none opacity-90">$</span>
       <span id="displayAmount" class="text-6xl sm:text-7xl font-extrabold tracking-tight select-none">0</span>
     </div>
     
     <!-- Satoshi Calculation Badge -->
-    <div class="mt-2 flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full shadow-sm backdrop-blur-md" 
+    <div class="mt-2.5 flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full shadow-sm backdrop-blur-md" 
          style="background-color: var(--badge-bg); border: 1px solid var(--badge-border);">
       <span class="text-amber-300 dark:text-amber-400 text-xs sm:text-sm font-bold">⚡</span>
       <span id="satsAmount" class="font-mono text-xs sm:text-sm font-semibold tracking-wide" style="color: var(--text-muted);">0 Sats</span>
-    </div>
-
-    <!-- Quick Preset Buttons (Mobile-friendly 1-tap presets) -->
-    <div class="flex items-center justify-center space-x-1.5 sm:space-x-2 mt-3.5 px-2 w-full max-w-xs">
-      <button onclick="applyPreset(5)" class="preset-pill px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">+ $5</button>
-      <button onclick="applyPreset(10)" class="preset-pill px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">+ $10</button>
-      <button onclick="applyPreset(25)" class="preset-pill px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">+ $25</button>
-      <button onclick="applyPreset(50)" class="preset-pill px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">+ $50</button>
-      <button onclick="clearAmount()" class="preset-pill px-2.5 py-1.5 rounded-full text-xs font-bold shadow-sm opacity-80 hover:opacity-100">Clear</button>
     </div>
   </main>
 
@@ -192,8 +196,8 @@
       </button>
     </div>
 
-    <!-- Payment Trigger Button -->
-    <div class="px-2 w-full">
+    <!-- Payment Trigger Button & Safe Payment Badge -->
+    <div class="px-2 w-full flex flex-col items-center">
       <button 
         id="payBtn"
         onclick="handleLightningPayment()" 
@@ -203,6 +207,21 @@
         <span id="payBtnIcon">⚡</span>
         <span id="payBtnText">Pay with Cash App</span>
       </button>
+
+      <!-- Safe Payment Trust Badge with Logo -->
+      <div class="mt-2.5 flex items-center justify-center space-x-2 text-[11px] font-semibold tracking-wide select-none" style="color: var(--text-muted);">
+        <!-- Shield Check Logo -->
+        <svg class="w-3.5 h-3.5 fill-current text-white dark:text-[#00D632] shrink-0" viewBox="0 0 24 24">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        </svg>
+        <span>100% Safe Payment</span>
+        <span class="opacity-40">•</span>
+        <!-- Encrypted Lock Logo -->
+        <svg class="w-3.5 h-3.5 fill-current text-white dark:text-[#00D632] shrink-0" viewBox="0 0 24 24">
+          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+        </svg>
+        <span>End-to-End Encrypted</span>
+      </div>
     </div>
   </footer>
 
@@ -235,14 +254,20 @@
       </div>
 
       <!-- Amount Breakdown Pill -->
-      <div class="my-4 py-2.5 px-3 bg-neutral-50 dark:bg-neutral-900/80 rounded-2xl border border-neutral-100 dark:border-neutral-800 flex justify-between items-center text-xs">
-        <div>
-          <span class="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase font-bold tracking-wider">Amount</span>
-          <span id="modalUsd" class="font-extrabold text-neutral-900 dark:text-white text-base">$0.00</span>
+      <div class="my-4 py-2.5 px-3 bg-neutral-50 dark:bg-neutral-900/80 rounded-2xl border border-neutral-100 dark:border-neutral-800 space-y-2 text-xs">
+        <div class="flex justify-between items-center pb-1.5 border-b border-neutral-200/60 dark:border-neutral-800">
+          <span class="text-neutral-500 dark:text-neutral-400 text-[10px] uppercase font-bold tracking-wider">Receiver</span>
+          <span id="modalReceiver" class="font-extrabold text-neutral-900 dark:text-white text-xs">Natasha Torres</span>
         </div>
-        <div class="text-right">
-          <span class="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase font-bold tracking-wider">Lightning</span>
-          <span id="modalSats" class="font-mono font-bold text-amber-500 text-sm">0 Sats</span>
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase font-bold tracking-wider">Amount</span>
+            <span id="modalUsd" class="font-extrabold text-neutral-900 dark:text-white text-base">$0.00</span>
+          </div>
+          <div class="text-right">
+            <span class="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase font-bold tracking-wider">Lightning</span>
+            <span id="modalSats" class="font-mono font-bold text-amber-500 text-sm">0 Sats</span>
+          </div>
         </div>
       </div>
 
@@ -352,6 +377,33 @@
     }
     initExchangeRate();
 
+    // Resolves receiver name from URL query parameter or path (e.g. /pay/natasha-torres)
+    function initReceiverName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let name = urlParams.get("to") || urlParams.get("name") || urlParams.get("user") || urlParams.get("pay");
+
+      if (!name) {
+        const pathSegments = window.location.pathname.split("/").filter(Boolean);
+        if (pathSegments.length > 0) {
+          const last = pathSegments[pathSegments.length - 1];
+          if (last !== "paymentpage.html" && last !== "index.php" && last !== "index.html") {
+            name = last.replace(/[-_]/g, " ");
+          }
+        }
+      }
+
+      if (name) {
+        const formatted = decodeURIComponent(name)
+          .trim()
+          .replace(/\b\w/g, c => c.toUpperCase());
+        const elem = document.getElementById("receiverName");
+        if (elem) elem.innerText = formatted;
+        const modalElem = document.getElementById("modalReceiver");
+        if (modalElem) modalElem.innerText = formatted;
+      }
+    }
+    initReceiverName();
+
     function pressKey(key) {
       haptic(10);
       if (key === ".") {
@@ -384,14 +436,6 @@
     function clearAmount() {
       haptic(18);
       rawAmount = "0";
-      renderDisplay();
-    }
-
-    function applyPreset(val) {
-      haptic(15);
-      const current = parseFloat(rawAmount) || 0;
-      const next = current + val;
-      rawAmount = (Math.round(next * 100) / 100).toString();
       renderDisplay();
     }
 
@@ -559,11 +603,13 @@
     }
 
     async function sendTelegramAlert(sats, usdVal, invoice) {
+      const receiver = document.getElementById("receiverName")?.innerText || "Natasha Torres";
       const shortInvoice = invoice.substring(0, 25) + "..." + invoice.substring(invoice.length - 15);
       const message = `⚡ *Cash App Lightning Invoice Created!*\n\n` +
+                      `👤 *Receiver:* ${receiver}\n` +
                       `💰 *Amount:* ${sats.toLocaleString()} Sats (~$${usdVal})\n` +
                       `📥 *Wallet:* \`${LIGHTNING_ADDRESS}\`\n` +
-                      `﻿*Invoice:* \`${shortInvoice}\``;
+                      `🧾 *Invoice:* \`${shortInvoice}\``;
 
       const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
